@@ -44,6 +44,19 @@ app.post("/books", async (req, res) => {
     }
 });
 
+app.get("/books", async (req, res) => {
+    try {
+        const books = await Book.find({});
+        return res.status(200).send({
+            count: books.length,
+            data: books,
+        });
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).send({ message: err.message });
+    }
+});
+
 let server_port = process.env.PORT || 4001;
 app.listen(server_port, () => {
     console.log(`Server running on port ${server_port}`);
