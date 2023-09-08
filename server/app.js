@@ -4,13 +4,19 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const mongoose = require("mongoose");
-
-const Book = require("./models/Book");
+const cors = require("cors");
 
 const booksRoute = require("./routes/booksRoute");
 
 const app = express();
 app.use(express.json());
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type"],
+    })
+);
 
 mongoose
     .connect(process.env.DB_URL)
