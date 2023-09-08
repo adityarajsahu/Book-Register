@@ -57,6 +57,20 @@ app.get("/books", async (req, res) => {
     }
 });
 
+app.get("/books/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const book = await Book.findById(id);
+        if (!book) {
+            return res.status(404).send({ message: "Book not found" });
+        }
+        return res.status(200).send(book);
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).send({ message: err.message });
+    }
+});
+
 let server_port = process.env.PORT || 4001;
 app.listen(server_port, () => {
     console.log(`Server running on port ${server_port}`);
