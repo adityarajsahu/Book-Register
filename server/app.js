@@ -28,7 +28,7 @@ app.post("/books", async (req, res) => {
     try {
         const { title, author, publishYear, description } = req.body;
         if (!title || !author || !publishYear || !description) {
-            return res.status(400).send({ message: "Some fields missing" });
+            return res.status(400).send({ message: "Some fields are missing" });
         }
 
         const book = await Book.create({
@@ -65,6 +65,26 @@ app.get("/books/:id", async (req, res) => {
             return res.status(404).send({ message: "Book not found" });
         }
         return res.status(200).send(book);
+    } catch (err) {
+        console.log(err.message);
+        return res.status(500).send({ message: err.message });
+    }
+});
+
+app.put("/books/:id", async (req, res) => {
+    try {
+        const { title, author, publishYear, description } = req.body;
+        if (!title || !author || !publishYear || !description) {
+            return res.status(400).send({ message: "Some fields are missing" });
+        }
+
+        const { id } = req.params;
+        const result = await Book.findByIdAndUpdate(id, req.body);
+
+        if (!result) {
+            return res.status(404).send({ message: "Book not found" });
+        }
+        return res.status(200).send({ message: "Book updated successfully" });
     } catch (err) {
         console.log(err.message);
         return res.status(500).send({ message: err.message });
