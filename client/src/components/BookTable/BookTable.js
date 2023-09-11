@@ -1,8 +1,5 @@
 import React from "react";
 import { Table, TableContainer, Paper } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import InfoIcon from "@mui/icons-material/Info";
 
 import TableHeader from "../TableHeader/TableHeader";
 import TableData from "../TableData/TableData";
