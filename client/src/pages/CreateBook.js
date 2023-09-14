@@ -12,7 +12,8 @@ const CreateBook = () => {
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const data = { title, author, publishYear, description };
         setLoading(true);
         axios
